@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { Typography, CssBaseline, AppBar, Toolbar } from '@mui/material';
+import ActionButton from "./components/ActionButton"
+import AddExercise from './components/AddExercise';
+import Form from './components/Form'
+import { useState } from 'react';
+
+const MyComponent = () => {
+  const [exercises, setExercises] = useState([]);
+  const [category, setCategory] = useState("");
+  const [exercise, setExercise] = useState({});
+  const [editMode, setEditMode] = useState(false);
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <CssBaseline />
+    <AppBar>
+    <Toolbar>
+      <Typography variant="h3" style={{flexGrow:"1"}}>Body Exercises</Typography>
+      {/* <ActionButton /> */}
+      <Form />
+      {/* <AddExercise /> */}
+    </Toolbar>
+    </AppBar>
+    </>
   );
 }
 

@@ -3,6 +3,7 @@ import ActionButton from "./components/ActionButton"
 import AddExercise from './components/AddExercise';
 import Form from './components/Form'
 import { useState } from 'react';
+import { muscles, exercises } from './components/Exercises'
 
 const MyComponent = () => {
   const [exercises, setExercises] = useState([]);

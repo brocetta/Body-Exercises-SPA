@@ -30,13 +30,30 @@ const handleCategorySelect = (category) => {
   setCategory(category);
 };
 const handleExerciseSelect = id => {
-  const selectedExercise = exercises.find(ex => ex.id === id);
-  setExercise(selectedExercise);
+  setExercise(exercises.find(ex => ex.id === id));
   setEditMode(false);
 };
-
-
-
+const handleExerciseCreate = (exercise) => {
+  setExercises(prevExercises => [...prevExercises, exercise])
+}
+const handleExerciseDelete = (id) => {
+  setExercises(prevExercises => prevExercises.filter(ex => ex.id !== id));
+  if (exercise.id === id) {
+    setExercise({});
+    setEditMode(false);
+  }
+};
+const handleExerciseSelectEdit = id => {
+  setExercise(exercises.find(ex => ex.id === id));
+  setEditMode(true);
+};
+const handleExerciseEdit = exercise => {
+  const updatedExercises = exercises.filter(ex => ex.id !== exercise.id);
+  const newExercises = [...updatedExercises, exercise];
+  setExercises(newExercises);
+  setExercise(exercise);
+  setEditMode(false);
+};
 
 
 

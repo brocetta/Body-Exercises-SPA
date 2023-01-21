@@ -4,6 +4,7 @@ import AddExercise from './components/AddExercise';
 import Form from './components/Form'
 import { useState } from 'react';
 import { muscles, exercises } from './components/Exercises'
+import ExercisesContainer from "./components/ExercisesContainer" 
 
 function App() {
   const [exercises, setExercises] = useState([]);
@@ -54,11 +55,7 @@ const handleExerciseEdit = exercise => {
   setExercise(exercise);
   setEditMode(false);
 };
-
-
-
-
-
+const groupedExercises = getExercisesByMuscles();
   return (
     <>
     <CssBaseline />
@@ -70,6 +67,18 @@ const handleExerciseEdit = exercise => {
       {/* <AddExercise /> */}
     </Toolbar>
     </AppBar>
+    <ExercisesContainer
+                exercises={getExercisesByMuscles()}
+                category={category}
+                onSelectItem={handleExerciseSelect}
+                individualExercise={exercise}
+                onDelete={handleExerciseDelete}
+                onSelectEdit={handleExerciseSelectEdit}
+                onEdit={handleExerciseEdit}
+                editMode={editMode}
+                muscles={muscles}
+                groupedExercises={groupedExercises}
+            />
     </>
   );
 }

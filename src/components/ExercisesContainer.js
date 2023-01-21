@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Form from "./Form";
 import {
   Grid,
@@ -33,6 +33,7 @@ export default function ExercisesContainer(props) {
         individualExercise,
         editMode,
         category,
+        exercisesState,
       } = props;
       
       const {
@@ -40,11 +41,17 @@ export default function ExercisesContainer(props) {
         title = "Welcome!!!",
         description = "Click on the workout list to get some more information",
       } = individualExercise || {};
+
+      useEffect(() => {
+        console.log("Exercises state updated: ", exercisesState);
+        // re-render the ExercisesContainer component here
+      }, [exercisesState]);
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6}>
         <StyledPaper>
-          {groupedExercises.map(([group, exercises], index) => {
+          {groupedExercises.map(([group, exercisesState], index) => {
             if (!category || category === group) {
               return (
                 <Fragment key={group}>
@@ -55,7 +62,7 @@ export default function ExercisesContainer(props) {
                     {group}
                   </Typography>
                   <List component="ul">
-                    {exercises.map((exercise, index) => {
+                    {exercisesState.map((exercise, index) => {
                       return (
                         <ListItem
                           key={exercise.id}

@@ -1,8 +1,9 @@
 import { Typography, CssBaseline, AppBar, Toolbar } from '@mui/material';
 import Form from './components/Form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { muscles, exercises } from './components/Exercises'
 import ExercisesContainer from "./components/ExercisesContainer" 
+
 
 function App() {
   const [exercisesState, setExercisesState] = useState([]);
@@ -10,6 +11,11 @@ function App() {
   const [exercise, setExercise] = useState({});
   const [editMode, setEditMode] = useState(false);
 
+  useEffect(() => {
+    console.log("Exercises state updated: ", exercisesState);
+    // re-render the ExercisesContainer component here
+  }, [exercisesState, exercise]);
+ 
 const getExercisesByMuscles = () => {
   const initExercises = muscles.reduce((allmuscles, category) => {
       return {
@@ -54,17 +60,18 @@ const handleExerciseEdit = exercise => {
   setEditMode(false);
 };
 const groupedExercises = getExercisesByMuscles();
+
   return (
     <>
     <CssBaseline />
     <AppBar position="relative">
     <Toolbar>
       <Typography variant="h3" style={{flexGrow:"1"}}>Body Exercises</Typography>
-      <Form />
+      <Form onCreate={handleExerciseCreate} />
     </Toolbar>
     </AppBar>
     <ExercisesContainer
-                exercises={getExercisesByMuscles()}
+                exercisesState={exercisesState}
                 category={category}
                 onSelectItem={handleExerciseSelect}
                 individualExercise={exercise}

@@ -18,6 +18,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
+import { useState } from 'react';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -57,7 +58,12 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs() {
+export default function CustomizedDialogs({onCreate}) {
+  const [title, setTitle] = useState("");
+  const [muscle, setMuscle] = useState("");
+  const [description, setDescription] = useState("");
+
+
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -80,17 +86,19 @@ export default function CustomizedDialogs() {
           Create New Exercise
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <TextField gutterbottom sx={{mb:"20px"}}
+          <TextField sx={{mb:"20px"}}
             margin="dense"
             label="Title"
             // value="Title"
+            onChange={e => setTitle(e.target.value)}
             fullWidth
             variant="standard"
           />
-          <FormControl gutterbottom sx={{width: "100%"}}>
+          <FormControl sx={{width: "100%"}}>
               <InputLabel style={{marginBottom: '16px'}}>Select Muscle</InputLabel>
               <Select
                 label="Muscles"
+                onChange={e => setMuscle(e.target.value)}
               >
                 <MenuItem value="Shoulders">Shoulders</MenuItem>
                 <MenuItem value="Chest">Chest</MenuItem>
@@ -99,18 +107,19 @@ export default function CustomizedDialogs() {
                 <MenuItem value="Legs">Legs</MenuItem>
               </Select>
             </FormControl>
-          <TextField gutterbottom
+          <TextField
             multiline
             rows={5}
             margin="dense"
             label="Description"
             // value="Description"
+            onChange={e => setDescription(e.target.value)}
             fullWidth
             variant="standard"
           />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={() => onCreate({ title, muscle, description })}>
             Create
           </Button>
         </DialogActions>

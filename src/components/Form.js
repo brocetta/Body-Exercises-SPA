@@ -11,7 +11,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import ActionButton from './ActionButton';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -69,7 +68,7 @@ export default function CustomizedDialogs() {
 
   return (
     <div>
-      <Fab variant="outlined" color="secondary"ariaLabel="add" onClick={handleClickOpen} size="medium">
+      <Fab variant="outlined" color="secondary" aria-label="add" onClick={handleClickOpen} size="medium">
         <AddIcon />
       </Fab>
       <BootstrapDialog
@@ -81,14 +80,14 @@ export default function CustomizedDialogs() {
           Create New Exercise
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <TextField gutterBottom sx={{mb:"20px"}}
+          <TextField gutterbottom sx={{mb:"20px"}}
             margin="dense"
             label="Title"
             // value="Title"
             fullWidth
             variant="standard"
           />
-          <FormControl gutterBottom sx={{width: "100%"}}>
+          <FormControl gutterbottom sx={{width: "100%"}}>
               <InputLabel style={{marginBottom: '16px'}}>Select Muscle</InputLabel>
               <Select
                 label="Muscles"
@@ -100,7 +99,7 @@ export default function CustomizedDialogs() {
                 <MenuItem value="Legs">Legs</MenuItem>
               </Select>
             </FormControl>
-          <TextField gutterBottom
+          <TextField gutterbottom
             multiline
             rows={5}
             margin="dense"

@@ -1,13 +1,11 @@
 import { Typography, CssBaseline, AppBar, Toolbar } from '@mui/material';
-import ActionButton from "./components/ActionButton"
-import AddExercise from './components/AddExercise';
-import Form from './components/Form'
+import Form from './components/Form';
 import { useState } from 'react';
 import { muscles, exercises } from './components/Exercises'
 import ExercisesContainer from "./components/ExercisesContainer" 
 
 function App() {
-  const [exercises, setExercises] = useState([]);
+  const [exercisesState, setExercisesState] = useState([]);
   const [category, setCategory] = useState("");
   const [exercise, setExercise] = useState({});
   const [editMode, setEditMode] = useState(false);
@@ -20,13 +18,13 @@ const getExercisesByMuscles = () => {
       };
   }, {});
   return Object.entries(
-      exercises.reduce((acc, curr) => {
-          const { muscles } = curr;
-          acc[muscles] = [...acc[muscles], curr];
-          return acc;
-      }, initExercises)
-  );
-};
+    exercises.reduce((acc, curr) => {
+      const { muscles } = curr;
+      acc[muscles] = [...acc[muscles], curr];
+      return acc;
+    }, initExercises)
+    );
+  };
 const handleCategorySelect = (category) => {
   setCategory(category);
 };
@@ -35,10 +33,10 @@ const handleExerciseSelect = id => {
   setEditMode(false);
 };
 const handleExerciseCreate = (exercise) => {
-  setExercises(prevExercises => [...prevExercises, exercise])
+  setExercisesState(prevExercises => [...prevExercises, exercise])
 }
 const handleExerciseDelete = (id) => {
-  setExercises(prevExercises => prevExercises.filter(ex => ex.id !== id));
+  setExercisesState(prevExercises => prevExercises.filter(ex => ex.id !== id));
   if (exercise.id === id) {
     setExercise({});
     setEditMode(false);
@@ -51,7 +49,7 @@ const handleExerciseSelectEdit = id => {
 const handleExerciseEdit = exercise => {
   const updatedExercises = exercises.filter(ex => ex.id !== exercise.id);
   const newExercises = [...updatedExercises, exercise];
-  setExercises(newExercises);
+  setExercisesState(newExercises);
   setExercise(exercise);
   setEditMode(false);
 };
@@ -59,12 +57,10 @@ const groupedExercises = getExercisesByMuscles();
   return (
     <>
     <CssBaseline />
-    <AppBar>
+    <AppBar position="relative">
     <Toolbar>
       <Typography variant="h3" style={{flexGrow:"1"}}>Body Exercises</Typography>
-      {/* <ActionButton /> */}
       <Form />
-      {/* <AddExercise /> */}
     </Toolbar>
     </AppBar>
     <ExercisesContainer

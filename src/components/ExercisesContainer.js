@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import Form from "./Form";
 import {
   Grid,
@@ -22,21 +22,24 @@ const StyledPaper = styled(Paper)({
   overflowY: "auto",
 });
 
-export default function ExercisesContainer({
-  muscles,
-  groupedExercises,
-  onSelectItem,
-  onDelete,
-  onSelectEdit,
-  onEdit,
-  individualExercise: {
-    id,
-    title = "Welcome!!!",
-    description = "Click on the workout list to get some more information"
-  },
-  editMode,
-  category,
-}) {
+export default function ExercisesContainer(props) {
+    const {
+        muscles,
+        groupedExercises,
+        onSelectItem,
+        onDelete,
+        onSelectEdit,
+        onEdit,
+        individualExercise,
+        editMode,
+        category,
+      } = props;
+      
+      const {
+        id,
+        title = "Welcome!!!",
+        description = "Click on the workout list to get some more information",
+      } = individualExercise || {};
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6}>
@@ -61,9 +64,7 @@ export default function ExercisesContainer({
                         >
                           <ListItemText primary={exercise.title} />
                           <ListItemSecondaryAction>
-                            <IconButton
-                              onClick={() => onSelectEdit(exercise.id)}
-                            >
+                            <IconButton onClick={() => onSelectEdit(exercise.id)}>
                               <EditIcon />
                             </IconButton>
                             <IconButton onClick={() => onDelete(exercise.id)}>

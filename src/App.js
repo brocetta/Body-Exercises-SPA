@@ -39,10 +39,12 @@ const handleExerciseSelect = id => {
   setEditMode(false);
 };
 const handleExerciseCreate = (exercise) => {
-  setExercisesState(prevExercises => [...prevExercises, exercise])
+  const newExercisesState = [...exercisesState, exercise];
+  setExercisesState(newExercisesState);
 }
 const handleExerciseDelete = (id) => {
-  setExercisesState(prevExercises => prevExercises.filter(ex => ex.id !== id));
+  const newExercisesState = exercisesState.filter(ex => ex.id !== id);
+  setExercisesState(newExercisesState);
   if (exercise.id === id) {
     setExercise({});
     setEditMode(false);
@@ -52,10 +54,11 @@ const handleExerciseSelectEdit = id => {
   setExercise(exercises.find(ex => ex.id === id));
   setEditMode(true);
 };
-const handleExerciseEdit = exercise => {
-  const updatedExercises = exercises.filter(ex => ex.id !== exercise.id);
-  const newExercises = [...updatedExercises, exercise];
-  setExercisesState(newExercises);
+const handleExerciseEdit = (exercise) => {
+  const updatedExercises = [...exercisesState];
+  const exerciseIndex = updatedExercises.findIndex((ex) => ex.id === exercise.id);
+  updatedExercises[exerciseIndex] = exercise;
+  setExercisesState([...exercisesState, exercise])
   setExercise(exercise);
   setEditMode(false);
 };

@@ -21,7 +21,7 @@ const StyledPaper = styled(Paper)({
   height: 500,
   overflowY: "auto",
 });
-
+console.log("container");
 export default function ExercisesContainer(props) {
     const {
         muscles,
@@ -34,18 +34,13 @@ export default function ExercisesContainer(props) {
         editMode,
         category,
         exercisesState,
-      } = props;
+    } = props;
       
       const {
         id,
         title = "Welcome!!!",
         description = "Click on the workout list to get some more information",
       } = individualExercise || {};
-
-      useEffect(() => {
-        console.log("Exercises state updated: ", exercisesState);
-        // re-render the ExercisesContainer component here
-      }, [exercisesState]);
 
   return (
     <Grid container spacing={2}>
